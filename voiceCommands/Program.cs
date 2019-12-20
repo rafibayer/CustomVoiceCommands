@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace voiceCommands
@@ -16,8 +17,10 @@ namespace voiceCommands
         static void Main()
         {
 
-            Console.WriteLine("Running now:"); 
-            
+            Console.WriteLine("Running now:");
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

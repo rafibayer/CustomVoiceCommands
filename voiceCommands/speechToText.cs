@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 using System.IO;
 using System.Text;
+using System.Media;
 
 
 namespace voiceCommands
@@ -25,14 +26,20 @@ namespace voiceCommands
             // create the recognizer object
             using (var recognizer = new SpeechRecognizer(config))
             {
+                // play sfx to let user know recording has started
+                startSound();
+
                 // make the API call to Azure Service
                 var result = await recognizer.RecognizeOnceAsync();
+
+                // play sfx to let user know recording has finished;
+                stopSound();
 
                 // success
                 if (result.Reason == ResultReason.RecognizedSpeech)
                 {
                     Console.WriteLine($"STT: We recognized: {result.Text}");
-                    ExecuteCommand.execute(result.Text);
+                    ExecuteCommand.Execute(result.Text);
                 }
                 // couldn't understand
                 else if (result.Reason == ResultReason.NoMatch)
@@ -71,6 +78,20 @@ namespace voiceCommands
 
         }
 
+
+        private static void startSound()
+        {
+
+
+            SoundPlayer startSound = new SoundPlayer("sounds/startSound.wav");
+            startSound.Play();
+        }
+
+        private static void stopSound()
+        {
+            SoundPlayer stopSound = new SoundPlayer("sounds/stopSound.wav");
+            stopSound.Play();
+        }
 
     }
 }

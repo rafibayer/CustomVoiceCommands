@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace voiceCommands
 {
-    class ExecuteCommand
+    static class ExecuteCommand
     {
         // if the command contains this word, cancel the command
         // should be factored out and configurable by user
         public const string cancelKeyword = "cancel";
 
-        public static void execute(String command)
+        public static void Execute(String command)
         {
-            // strip whitespace
-            command = command.ToLower().Trim();
-            // strip outer punctuation
-            command = command.Trim(new[] {'.', '!', '?', ','}); 
+            command = Cleaner.Clean(command);
             
             Console.WriteLine($"Executing command: {command}");
 
@@ -38,11 +35,19 @@ namespace voiceCommands
             commands.Add("password", "all I see is ********?");
 
 
+            // TEST COMMAND
+            // TODO: FACTOR OUT
+            if (command.Equals("calculator"))
+            {
+                openCalc();
+            }
+
             // for now since we map to string, print the value string
-            string mapValue;
+            String mapValue;
             if (commands.TryGetValue(command, out mapValue))
             {
                 Console.WriteLine(mapValue);
+               
             }
             else
             {
@@ -51,5 +56,15 @@ namespace voiceCommands
 
         }
 
+        // test command
+        // code to execute when calculator command is issued
+        // TODO: FACTOR OUT
+        private static void openCalc()
+        {
+            System.Diagnostics.Process.Start(@"calc.exe");
+        }
+
     }
+
+    
 }
