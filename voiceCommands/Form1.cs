@@ -17,6 +17,7 @@ namespace voiceCommands
             InitializeComponent();
         }
 
+        // when the listen button is clicked, call the SpeechToText component
         private void listenButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Listen Button was pressed");

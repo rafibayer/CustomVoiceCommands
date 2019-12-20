@@ -10,16 +10,22 @@ namespace voiceCommands
     class speechToText
     {
 
+        // Azure Service Region
         public const String serviceRegion = "westus";
+        // Untracked file with my Azure service token key
         public const String apiKeyPath = "speechServiceKey.txt";
 
         public static async Task RecognizeSpeechAsync()
         {
+            // read API key file
             String apiKey = getAPIKey();
+            // Build Speech config
             var config = SpeechConfig.FromSubscription(apiKey, serviceRegion);
 
+            // create the recognizer object
             using (var recognizer = new SpeechRecognizer(config))
             {
+                // make the API call to Azure Service
                 var result = await recognizer.RecognizeOnceAsync();
 
                 // success
@@ -28,10 +34,12 @@ namespace voiceCommands
                     Console.WriteLine($"STT: We recognized: {result.Text}");
                     ExecuteCommand.execute(result.Text);
                 }
+                // couldn't understand
                 else if (result.Reason == ResultReason.NoMatch)
                 {
                     Console.WriteLine($"STT: Speech could not be recognized");
                 }
+                // canceled
                 else if (result.Reason == ResultReason.Canceled)
                 {
                     var cancellation = CancellationDetails.FromResult(result);
@@ -48,12 +56,19 @@ namespace voiceCommands
 
         }
 
-       
+       // read the API key from the file specified by the class const
         private static String getAPIKey()
         {
-            String apiKey = File.ReadAllText(apiKeyPath);
+            try
+            {
+                return File.ReadAllText(apiKeyPath);
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Could not read API key file");
+                throw;
+            }
 
-            return apiKey;
         }
 
 
