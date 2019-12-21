@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cleaner.cs" />
+    <Compile Include="CliCommand.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="ExecuteCommand.cs" />
     <Compile Include="speechToText.cs" />
     <Compile Include="Form1.cs">

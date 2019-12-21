@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 using System.IO;
-using System.Text;
 using System.Media;
 
 

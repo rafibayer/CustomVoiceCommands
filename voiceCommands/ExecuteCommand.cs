@@ -28,25 +28,55 @@ namespace voiceCommands
 
             // dictionary of commands
             // should be factored out and build from user created commands
-            // TODO: maybe map from String to function or CLI command?
-            Dictionary<String, String> commands = new Dictionary<String, String>();
+            Dictionary<String, ICommand> commands = new Dictionary<String, ICommand>();
 
+            // TODO: load from file or other sources
             // sample command for testing
-            commands.Add("password", "all I see is ********?");
+
+            // ####################################
+            // simple process start
+            CliCommand myCommand = new CliCommand(
+                "calculator",
+                "Open Calc",
+                "Opens the Calculator",
+                "calc.exe");
+            commands.Add(myCommand.Command, myCommand);
+
+            // open chrome to a url
+            CliCommand openAzure = new CliCommand(
+                "azure",
+                "Open Azure",
+                "Opens Azure Website",
+                "start chrome https://azure.microsoft.com/en-us/"
+                );
+            commands.Add(openAzure.Command, openAzure);
+
+            // call an internal windows function
+            CliCommand lockPC = new CliCommand(
+                "lock",
+                "Lock PC",
+                "Locks windows PC",
+                @"C:\WINDOWS\system32\rundll32.exe user32.dll, LockWorkStation"
+                );
+            commands.Add(lockPC.Command, lockPC);
+
+            // execute a script
+            CliCommand smile = new CliCommand(
+                "smile",
+                "Make Smiley",
+                "Generates a smiley face with python",
+                @"python c:/Users/Easy_/Desktop/PyCommands/Smile.py"
+            );
+
+            commands.Add(smile.Command, smile);
+            // ####################################
 
 
-            // TEST COMMAND
-            // TODO: FACTOR OUT
-            if (command.Equals("calculator"))
-            {
-                openCalc();
-            }
 
-            // for now since we map to string, print the value string
-            String mapValue;
+            ICommand mapValue;
             if (commands.TryGetValue(command, out mapValue))
             {
-                Console.WriteLine(mapValue);
+                mapValue.Execute();
                
             }
             else
@@ -56,13 +86,8 @@ namespace voiceCommands
 
         }
 
-        // test command
-        // code to execute when calculator command is issued
-        // TODO: FACTOR OUT
-        private static void openCalc()
-        {
-            System.Diagnostics.Process.Start(@"calc.exe");
-        }
+
+        
 
     }
 
