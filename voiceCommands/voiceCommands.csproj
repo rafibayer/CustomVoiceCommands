@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Cleaner.cs" />
     <Compile Include="CliCommand.cs" />
+    <Compile Include="CsvReader.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ExecuteCommand.cs" />
     <Compile Include="speechToText.cs" />

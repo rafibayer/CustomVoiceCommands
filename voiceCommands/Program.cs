@@ -20,10 +20,20 @@ namespace voiceCommands
             Console.WriteLine("Running now:");
 
 
-
+            /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            */
+
+            var data = CsvReader.readCSV("commands.csv");
+
+            CsvReader.writeCSV("commands2.csv", data);
+
+
+
+
+
 
 
             
