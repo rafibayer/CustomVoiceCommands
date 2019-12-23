@@ -27,96 +27,44 @@ namespace voiceCommands
             }
 
             // dictionary of commands
-            // should be factored out and build from user created commands
             Dictionary<String, ICommand> commands = new Dictionary<String, ICommand>();
-
-            // TODO: load from file or other sources
-            // sample command for testing
-
-            // ####################################
-            // simple process start
-            /*
-            CliCommand myCommand = new CliCommand(
-                "calculator",
-                "Open Calc",
-                "Opens the Calculator",
-                "calc.exe");
-            commands.Add(myCommand.Command, myCommand);
-
-            // open chrome to a url
-            CliCommand openAzure = new CliCommand(
-                "azure",
-                "Open Azure",
-                "Opens Azure Website",
-                "start chrome https://azure.microsoft.com/en-us/"
-                );
-            commands.Add(openAzure.Command, openAzure);
-
-            // call an internal windows function
-            CliCommand lockPC = new CliCommand(
-                "lock",
-                "Lock PC",
-                "Locks windows PC",
-                @"C:\WINDOWS\system32\rundll32.exe user32.dll, LockWorkStation"
-                );
-            commands.Add(lockPC.Command, lockPC);
-
-            // execute a script
-            CliCommand smile = new CliCommand(
-                "smile",
-                "Make Smiley",
-                "Generates a smiley face with python",
-                @"python c:/Users/Easy_/Desktop/PyCommands/Smile.py"
-            );
-
-            commands.Add(smile.Command, smile);
-            */
-            // ####################################
 
 
             // read commands from CSV and add all as new CLI commands
+            // TODO: only call this when program starts or when commands change
+            // write now we are calling it everytime a command is executed which may be slow (disk IO)
             var commandList = CsvReader.readCSV("commands.csv"); // file contents
             string[] columns = CsvReader.columns; // order of columns
             foreach (String cmd in commandList)
             {
+                Console.WriteLine($"Loaded: {cmd}");
                 String[] values = cmd.Split( CsvReader.sep); // command values
 
                 commands.Add
                 (
-                    values[Array.IndexOf(columns, "Name")], // value index of name
+                    Cleaner.Clean(values[Array.IndexOf(columns, "Command")]), // value index of command
 
                     new CliCommand
                     (
                         // value indicies for all parameters for command constructor
-                        values[Array.IndexOf(columns, "Command")],
+                        Cleaner.Clean(values[Array.IndexOf(columns, "Command")]),
                         values[Array.IndexOf(columns, "Name")],
                         values[Array.IndexOf(columns, "Descr")],
                         values[Array.IndexOf(columns, "CLI")]
                     )
                 );
-
-
             }
 
-
-
+            // try to find the command said by the user
             ICommand mapValue;
             if (commands.TryGetValue(command, out mapValue))
             {
-                mapValue.Execute();
-               
+                mapValue.Execute(); // if found, execute it
             }
             else
             {
-                Console.WriteLine("Command not found");
+                Console.WriteLine("Command not found"); // otherwise print not found
             }
-
         }
-
-
-        
-
     }
-
-    
 }

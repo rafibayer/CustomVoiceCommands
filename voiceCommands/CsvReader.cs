@@ -9,14 +9,15 @@ namespace voiceCommands
 {
     static class CsvReader
     {
-        // CSV columns
+        // CSV separator
         public static readonly char sep = '|';
+        // CSV columns
+
         public static readonly String[] columns = { "Name", "Command", "Descr", "CLI" };
 
         public static List<String> readCSV(String filepath)
         {
             List<String> commands = new List<String>();
-
 
             using (var reader = new StreamReader(@filepath))
             {
@@ -30,12 +31,16 @@ namespace voiceCommands
 
                 while (!reader.EndOfStream)
                 {
-                    commands.Add(reader.ReadLine());
+                    String line = reader.ReadLine();
+                    if (line.Equals(""))
+                    {
+                        Console.WriteLine("Blank/empty lines found in CSV");
+                        break;
+                    }
+                    commands.Add(line);
                 }
             }
-
             return commands;
-
         }
 
         public static void writeCSV(String filepath, List<String> commands)
@@ -48,9 +53,6 @@ namespace voiceCommands
             }
 
             File.WriteAllText(@filepath, csv.ToString());
-
         }
-
-
     }
 }

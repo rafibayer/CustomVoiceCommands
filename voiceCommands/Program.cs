@@ -17,15 +17,8 @@ namespace voiceCommands
         static void Main()
         {
 
+
             Console.WriteLine("Running now:");
-
-            var data = CsvReader.readCSV("commands.csv");
-            foreach (String s in data)
-            {
-                Console.WriteLine(s);
-            }
-
-            CsvReader.writeCSV("commands2.csv", data);
 
 
             Application.EnableVisualStyles();
