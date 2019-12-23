@@ -37,7 +37,6 @@ namespace voiceCommands
             string[] columns = CsvReader.columns; // order of columns
             foreach (String cmd in commandList)
             {
-                Console.WriteLine($"Loaded: {cmd}");
                 String[] values = cmd.Split( CsvReader.sep); // command values
 
                 commands.Add

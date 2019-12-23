@@ -28,7 +28,19 @@ namespace voiceCommands
         {
             // execute the CLI command
             // TODO: hide cmd window
-            System.Diagnostics.Process.Start("CMD.exe", "/C" + @CLI);
+            //System.Diagnostics.Process.Start("CMD.exe", "/C" + @CLI);
+
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            if (!CLI.Contains("cmd.exe"))
+            {
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+
+            }
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C " + @CLI;
+            process.StartInfo = startInfo;
+            process.Start();
 
         }
     }

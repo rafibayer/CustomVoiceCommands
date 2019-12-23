@@ -29,11 +29,6 @@ namespace voiceCommands
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         // populates command grid view with the saved commands
         private void InitializeCommandGridView()
         {
@@ -104,6 +99,7 @@ namespace voiceCommands
                 // invoke the save click function
                 save_Click(null, null);
             }
+
         }
     }
 }

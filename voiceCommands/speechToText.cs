@@ -7,16 +7,27 @@ using System.Media;
 
 namespace voiceCommands
 {
-    class speechToText
+    static class speechToText
     {
 
+        // TODO: prevent running multiple instances at the same time
+
         // Azure Service Region
-        public const String serviceRegion = "westus";
+        public static readonly String serviceRegion = "westus";
         // Untracked file with my Azure service token key
-        public const String apiKeyPath = "speechServiceKey.txt";
+        public static readonly String apiKeyPath = "speechServiceKey.txt";
+
+        private static bool inUse = false;
 
         public static async Task RecognizeSpeechAsync()
         {
+
+            if (inUse)
+            {
+                return;
+            }
+
+
             // read API key file
             String apiKey = getAPIKey();
             // Build Speech config
@@ -27,12 +38,14 @@ namespace voiceCommands
             {
                 // play sfx to let user know recording has started
                 startSound();
+                inUse = true;
 
                 // make the API call to Azure Service
                 var result = await recognizer.RecognizeOnceAsync();
 
                 // play sfx to let user know recording has finished;
                 stopSound();
+                inUse = false;
 
                 // success
                 if (result.Reason == ResultReason.RecognizedSpeech)
