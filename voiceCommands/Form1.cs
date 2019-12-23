@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +13,42 @@ namespace voiceCommands
 {
     public partial class Form1 : Form
     {
+
+        // DLL libraries used to manage hotkeys
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        // hotkey action ID
+        const int HOTKEY_ACTION_ID = 1;
+
+        //TODO: MAKE HOTKEY configureable 
+        // https://stackoverflow.com/questions/2964161/how-to-unregister-a-specific-hotkey-using-c-sharp
+
+
         public Form1()
         {
+            // register the hotkey (default ALT+Q)
+            RegisterHotKey(this.Handle, HOTKEY_ACTION_ID, 1, (int)Keys.Q);
+
             InitializeComponent();
             InitializeCommandGridView();
 
+        }
+
+        // hotkey call, invokes listen
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312 && m.WParam.ToInt32() == HOTKEY_ACTION_ID)
+            {
+
+
+                Console.WriteLine("Hotkey pressed");
+                listenButton_Click(null, null);
+
+            }
+            base.WndProc(ref m);
         }
 
         // when the listen button is clicked, call the SpeechToText component
