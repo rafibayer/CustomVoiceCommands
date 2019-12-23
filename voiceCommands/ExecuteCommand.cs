@@ -35,6 +35,7 @@ namespace voiceCommands
 
             // ####################################
             // simple process start
+            /*
             CliCommand myCommand = new CliCommand(
                 "calculator",
                 "Open Calc",
@@ -69,7 +70,33 @@ namespace voiceCommands
             );
 
             commands.Add(smile.Command, smile);
+            */
             // ####################################
+
+
+            // read commands from CSV and add all as new CLI commands
+            var commandList = CsvReader.readCSV("commands.csv"); // file contents
+            string[] columns = CsvReader.columns; // order of columns
+            foreach (String cmd in commandList)
+            {
+                String[] values = cmd.Split( CsvReader.sep); // command values
+
+                commands.Add
+                (
+                    values[Array.IndexOf(columns, "Name")], // value index of name
+
+                    new CliCommand
+                    (
+                        // value indicies for all parameters for command constructor
+                        values[Array.IndexOf(columns, "Command")],
+                        values[Array.IndexOf(columns, "Name")],
+                        values[Array.IndexOf(columns, "Descr")],
+                        values[Array.IndexOf(columns, "CLI")]
+                    )
+                );
+
+
+            }
 
 
 
