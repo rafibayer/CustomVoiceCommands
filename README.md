@@ -4,3 +4,5 @@ Create and manage custom voice commands using Azure Cognitive services and C# wi
 # Goal
 Allow users to define custom behaviors to execute with voice commands with an intuitive UI and minimal coding. 
 
+![app screenshot](https://github.com/rafibayer/CustomVoiceCommands/blob/master/readme/Capture.JPG)
+
