@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace voiceCommands
 {
@@ -21,21 +23,20 @@ namespace voiceCommands
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         // hotkey action ID
+        // used for binding and unbinding hotkey
         const int HOTKEY_ACTION_ID = 1;
-
-        //TODO: MAKE HOTKEY configureable 
-        // https://stackoverflow.com/questions/2964161/how-to-unregister-a-specific-hotkey-using-c-sharp
 
 
         public Form1()
         {
-            // register the hotkey (default ALT+Q)
-            RegisterHotKey(this.Handle, HOTKEY_ACTION_ID, 1, (int)Keys.Q);
+            
 
             InitializeComponent();
             InitializeCommandGridView();
+            InitializeHotkey();
 
         }
+
 
         // hotkey call, invokes listen
         protected override void WndProc(ref Message m)
@@ -50,6 +51,86 @@ namespace voiceCommands
             }
             base.WndProc(ref m);
         }
+
+        // initialize hotkey to the binding found in hotkey.JSON
+        // reflect these values in the form
+        private void InitializeHotkey()
+        {
+            // unregister old hotkey (if it exists)
+            UnregisterHotKey(this.Handle, HOTKEY_ACTION_ID);
+
+            // read hotkey json
+            JsonValue json = JsonObject.Parse(File.ReadAllText("hotkey.json"));
+
+            Console.WriteLine($"Read: {json.ToString()}");
+
+
+            // get the keybind
+            Keys key;
+            Enum.TryParse(json["key"], out key);
+            int keyInt = (int)key;
+
+            // get the modifiers 
+            int mod = 0;
+
+            // booleans for form reflection
+            bool alt = false; bool ctrl = false; bool shift = false;
+
+            if (json["mod"]["alt"])
+            {
+                mod |= 1; 
+                alt = true;
+            }
+            if (json["mod"]["ctrl"])
+            {
+                mod |= 2;
+                ctrl = true;
+
+            }
+            if (json["mod"]["shift"])
+            {
+                mod |= 4;
+                shift = true;
+            }
+
+            // register the hotkey
+            RegisterHotKey(this.Handle, HOTKEY_ACTION_ID, mod, keyInt);
+
+
+            // reflect json in form
+            hotkeyMod.SetItemCheckState(0, alt ? CheckState.Checked : CheckState.Unchecked);
+            hotkeyMod.SetItemCheckState(1, ctrl ? CheckState.Checked : CheckState.Unchecked);
+            hotkeyMod.SetItemCheckState(2, shift ? CheckState.Checked : CheckState.Unchecked);
+
+            hotkeyText.Text = key.ToString();
+
+
+        }
+
+        // read values from the form
+        // update hotkey.json
+        // rebind hotkey
+        private void hotkeySave_Click(object sender, EventArgs e)
+        {
+            // record data from form and build JSON
+            JsonValue newHotkey = new JsonObject();
+            newHotkey["key"] = hotkeyText.Text.ToString();
+            newHotkey["mod"] = new JsonObject();
+            newHotkey["mod"]["alt"] = (hotkeyMod.GetItemCheckState(0) == CheckState.Checked);
+            newHotkey["mod"]["ctrl"] = (hotkeyMod.GetItemCheckState(1) == CheckState.Checked);
+            newHotkey["mod"]["shift"] = (hotkeyMod.GetItemCheckState(2) == CheckState.Checked);
+
+            Console.WriteLine($"Saving: {newHotkey.ToString()}");
+
+            // save
+            File.WriteAllText("hotkey.json", newHotkey.ToString());
+
+            // rebind hotkey
+            InitializeHotkey();
+
+
+        }
+
 
         // when the listen button is clicked, call the SpeechToText component
         private void listenButton_Click(object sender, EventArgs e)
@@ -133,5 +214,7 @@ namespace voiceCommands
             }
 
         }
+
+        
     }
 }
