@@ -70,12 +70,12 @@ namespace voiceCommands
             Enum.TryParse(json["key"], out key);
             int keyInt = (int)key;
 
-            // get the modifiers 
+            // modifier values modifiers 
             int mod = 0;
-
             // booleans for form reflection
             bool alt = false; bool ctrl = false; bool shift = false;
 
+            // get modifier values
             if (json["mod"]["alt"])
             {
                 mod |= 1; 
@@ -96,12 +96,12 @@ namespace voiceCommands
             // register the hotkey
             RegisterHotKey(this.Handle, HOTKEY_ACTION_ID, mod, keyInt);
 
-
             // reflect json in form
+                // checkbox
             hotkeyMod.SetItemCheckState(0, alt ? CheckState.Checked : CheckState.Unchecked);
             hotkeyMod.SetItemCheckState(1, ctrl ? CheckState.Checked : CheckState.Unchecked);
             hotkeyMod.SetItemCheckState(2, shift ? CheckState.Checked : CheckState.Unchecked);
-
+                // text
             hotkeyText.Text = key.ToString();
 
 
