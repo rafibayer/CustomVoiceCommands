@@ -123,6 +123,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\icon.ico" />
     <Content Include="sounds\startSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

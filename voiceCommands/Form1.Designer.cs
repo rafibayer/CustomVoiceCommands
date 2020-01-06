@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listenButton = new System.Windows.Forms.Button();
             this.commandDataGrid = new System.Windows.Forms.DataGridView();
+            this.cmdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdDescr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdCLI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.save = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.hotkeyMod = new System.Windows.Forms.CheckedListBox();
             this.hotkeySave = new System.Windows.Forms.Button();
             this.hotkeyText = new System.Windows.Forms.TextBox();
-            this.cmdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdDescr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmdCLI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.commandDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // listenButton
             // 
-            this.listenButton.Location = new System.Drawing.Point(12, 356);
+            this.listenButton.Location = new System.Drawing.Point(12, 370);
             this.listenButton.Name = "listenButton";
-            this.listenButton.Size = new System.Drawing.Size(74, 45);
+            this.listenButton.Size = new System.Drawing.Size(74, 31);
             this.listenButton.TabIndex = 0;
-            this.listenButton.Text = "listen";
+            this.listenButton.Text = "Listen";
             this.listenButton.UseVisualStyleBackColor = true;
             this.listenButton.Click += new System.EventHandler(this.listenButton_Click);
             // 
@@ -66,13 +67,41 @@
             this.commandDataGrid.Size = new System.Drawing.Size(968, 527);
             this.commandDataGrid.TabIndex = 1;
             // 
+            // cmdName
+            // 
+            this.cmdName.HeaderText = "Name";
+            this.cmdName.Name = "cmdName";
+            this.cmdName.ToolTipText = "Name of Command";
+            this.cmdName.Width = 150;
+            // 
+            // cmdCommand
+            // 
+            this.cmdCommand.HeaderText = "Command";
+            this.cmdCommand.Name = "cmdCommand";
+            this.cmdCommand.ToolTipText = "Voice Command";
+            this.cmdCommand.Width = 150;
+            // 
+            // cmdDescr
+            // 
+            this.cmdDescr.HeaderText = "Description";
+            this.cmdDescr.Name = "cmdDescr";
+            this.cmdDescr.ToolTipText = "Description of the command";
+            this.cmdDescr.Width = 250;
+            // 
+            // cmdCLI
+            // 
+            this.cmdCLI.HeaderText = "CLI command";
+            this.cmdCLI.Name = "cmdCLI";
+            this.cmdCLI.ToolTipText = "CLI code to be executed";
+            this.cmdCLI.Width = 500;
+            // 
             // save
             // 
             this.save.Location = new System.Drawing.Point(12, 33);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(74, 36);
             this.save.TabIndex = 2;
-            this.save.Text = "Save Changes";
+            this.save.Text = "Save Commands";
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
@@ -116,34 +145,6 @@
             this.hotkeyText.Size = new System.Drawing.Size(73, 20);
             this.hotkeyText.TabIndex = 6;
             // 
-            // cmdName
-            // 
-            this.cmdName.HeaderText = "Name";
-            this.cmdName.Name = "cmdName";
-            this.cmdName.ToolTipText = "Name of Command";
-            this.cmdName.Width = 150;
-            // 
-            // cmdCommand
-            // 
-            this.cmdCommand.HeaderText = "Command";
-            this.cmdCommand.Name = "cmdCommand";
-            this.cmdCommand.ToolTipText = "Voice Command";
-            this.cmdCommand.Width = 150;
-            // 
-            // cmdDescr
-            // 
-            this.cmdDescr.HeaderText = "Description";
-            this.cmdDescr.Name = "cmdDescr";
-            this.cmdDescr.ToolTipText = "Description of the command";
-            this.cmdDescr.Width = 250;
-            // 
-            // cmdCLI
-            // 
-            this.cmdCLI.HeaderText = "CLI command";
-            this.cmdCLI.Name = "cmdCLI";
-            this.cmdCLI.ToolTipText = "CLI code to be executed";
-            this.cmdCLI.Width = 500;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +157,7 @@
             this.Controls.Add(this.save);
             this.Controls.Add(this.commandDataGrid);
             this.Controls.Add(this.listenButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "voiceCommands";

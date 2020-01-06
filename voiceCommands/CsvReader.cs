@@ -18,6 +18,12 @@ namespace voiceCommands
         public static List<String> readCSV(String filepath)
         {
             List<String> commands = new List<String>();
+            
+            // create command list if does not exist
+            if (!File.Exists(@filepath))
+            {
+                writeCSV(@filepath, commands);
+            }
 
             using (var reader = new StreamReader(@filepath))
             {
