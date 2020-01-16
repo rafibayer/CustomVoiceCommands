@@ -172,6 +172,9 @@ namespace voiceCommands
         // skips rows with empty cells
         private void save_Click(object sender, EventArgs e)
         {
+            // ensures that any pending changes to the DataGridView
+            // are finalized before saving
+            save.Focus();
             // list to build
             List<String> commands = new List<String>();
 

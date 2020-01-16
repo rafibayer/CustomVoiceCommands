@@ -45,9 +45,10 @@
             // 
             // listenButton
             // 
-            this.listenButton.Location = new System.Drawing.Point(12, 370);
+            this.listenButton.Location = new System.Drawing.Point(18, 569);
+            this.listenButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listenButton.Name = "listenButton";
-            this.listenButton.Size = new System.Drawing.Size(74, 31);
+            this.listenButton.Size = new System.Drawing.Size(111, 48);
             this.listenButton.TabIndex = 0;
             this.listenButton.Text = "Listen";
             this.listenButton.UseVisualStyleBackColor = true;
@@ -62,14 +63,17 @@
             this.cmdCommand,
             this.cmdDescr,
             this.cmdCLI});
-            this.commandDataGrid.Location = new System.Drawing.Point(132, 33);
+            this.commandDataGrid.Location = new System.Drawing.Point(198, 51);
+            this.commandDataGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.commandDataGrid.Name = "commandDataGrid";
-            this.commandDataGrid.Size = new System.Drawing.Size(968, 527);
+            this.commandDataGrid.RowHeadersWidth = 62;
+            this.commandDataGrid.Size = new System.Drawing.Size(1452, 811);
             this.commandDataGrid.TabIndex = 1;
             // 
             // cmdName
             // 
             this.cmdName.HeaderText = "Name";
+            this.cmdName.MinimumWidth = 8;
             this.cmdName.Name = "cmdName";
             this.cmdName.ToolTipText = "Name of Command";
             this.cmdName.Width = 150;
@@ -77,6 +81,7 @@
             // cmdCommand
             // 
             this.cmdCommand.HeaderText = "Command";
+            this.cmdCommand.MinimumWidth = 8;
             this.cmdCommand.Name = "cmdCommand";
             this.cmdCommand.ToolTipText = "Voice Command";
             this.cmdCommand.Width = 150;
@@ -84,6 +89,7 @@
             // cmdDescr
             // 
             this.cmdDescr.HeaderText = "Description";
+            this.cmdDescr.MinimumWidth = 8;
             this.cmdDescr.Name = "cmdDescr";
             this.cmdDescr.ToolTipText = "Description of the command";
             this.cmdDescr.Width = 250;
@@ -91,15 +97,17 @@
             // cmdCLI
             // 
             this.cmdCLI.HeaderText = "CLI command";
+            this.cmdCLI.MinimumWidth = 8;
             this.cmdCLI.Name = "cmdCLI";
             this.cmdCLI.ToolTipText = "CLI code to be executed";
             this.cmdCLI.Width = 500;
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(12, 33);
+            this.save.Location = new System.Drawing.Point(18, 51);
+            this.save.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(74, 36);
+            this.save.Size = new System.Drawing.Size(111, 55);
             this.save.TabIndex = 2;
             this.save.Text = "Save Commands";
             this.save.UseVisualStyleBackColor = true;
@@ -108,9 +116,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 404);
+            this.label1.Location = new System.Drawing.Point(18, 622);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Hotkey:";
             // 
@@ -121,16 +130,18 @@
             "ALT",
             "CTRL",
             "SHIFT"});
-            this.hotkeyMod.Location = new System.Drawing.Point(12, 447);
+            this.hotkeyMod.Location = new System.Drawing.Point(18, 688);
+            this.hotkeyMod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.hotkeyMod.Name = "hotkeyMod";
-            this.hotkeyMod.Size = new System.Drawing.Size(74, 64);
+            this.hotkeyMod.Size = new System.Drawing.Size(109, 96);
             this.hotkeyMod.TabIndex = 4;
             // 
             // hotkeySave
             // 
-            this.hotkeySave.Location = new System.Drawing.Point(12, 517);
+            this.hotkeySave.Location = new System.Drawing.Point(18, 795);
+            this.hotkeySave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.hotkeySave.Name = "hotkeySave";
-            this.hotkeySave.Size = new System.Drawing.Size(74, 43);
+            this.hotkeySave.Size = new System.Drawing.Size(111, 66);
             this.hotkeySave.TabIndex = 5;
             this.hotkeySave.Text = "Save Hotkey";
             this.hotkeySave.UseVisualStyleBackColor = true;
@@ -139,17 +150,18 @@
             // hotkeyText
             // 
             this.hotkeyText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.hotkeyText.Location = new System.Drawing.Point(12, 421);
+            this.hotkeyText.Location = new System.Drawing.Point(18, 648);
+            this.hotkeyText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.hotkeyText.MaxLength = 1;
             this.hotkeyText.Name = "hotkeyText";
-            this.hotkeyText.Size = new System.Drawing.Size(73, 20);
+            this.hotkeyText.Size = new System.Drawing.Size(108, 26);
             this.hotkeyText.TabIndex = 6;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1125, 596);
+            this.ClientSize = new System.Drawing.Size(1688, 917);
             this.Controls.Add(this.hotkeyText);
             this.Controls.Add(this.hotkeySave);
             this.Controls.Add(this.hotkeyMod);
@@ -159,8 +171,9 @@
             this.Controls.Add(this.listenButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
-            this.Text = "voiceCommands";
+            this.Text = "Voice Commands";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.commandDataGrid)).EndInit();
             this.ResumeLayout(false);
