@@ -15,7 +15,7 @@ namespace voiceCommands
         // Azure Service Region
         public static readonly String serviceRegion = "westus";
         // Untracked file with my Azure service token key
-        public static readonly String apiKeyPath = @"C:\Users\Easy_\source\repos\CustomVoiceCommands\voiceCommands\speechServiceKey.txt";
+        public static readonly String apiKeyPath = @"speechServiceKey.txt";
 
         private static bool inUse = false;
 
